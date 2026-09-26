@@ -26,7 +26,7 @@ Simple Task Manager is a web application that allows users to create and manage 
 
 The deployed application can be viewed here:
 
-https://6ab8339ee5118b14846c690c--simple-task-manager-monique.netlify.app
+https://simple-task-manager-monique.netlify.app/
 
 ## How to Use the Application
 
