@@ -1,33 +1,60 @@
+/* Page setup */
+* {
+    box-sizing: border-box;
+}
+
 body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #eef2f7;
     margin: 0;
-    padding: 0;
+    padding: 40px 20px;
+    color: #1f2937;
 }
 
+/* Main application container */
 .container {
-    width: 90%;
-    max-width: 700px;
-    margin: 40px auto;
-    background-color: white;
-    padding: 30px;
-    border-radius: 10px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 750px;
+    margin: 0 auto;
+    background-color: #ffffff;
+    padding: 35px;
+    border-radius: 14px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
 }
 
+/* Main heading */
 h1 {
     text-align: center;
-    margin-bottom: 10px;
+    margin-top: 0;
+    margin-bottom: 8px;
+    color: #1d4ed8;
+    font-size: 32px;
 }
 
-h2 {
-    margin-top: 30px;
-}
-
-p {
+/* Subtitle */
+.container > p {
     text-align: center;
+    color: #6b7280;
+    margin-top: 0;
+    margin-bottom: 35px;
 }
 
+/* Section headings */
+h2 {
+    color: #111827;
+    font-size: 21px;
+    margin-bottom: 20px;
+}
+
+/* Add task section */
+.task-form {
+    background-color: #f8fafc;
+    padding: 25px;
+    border-radius: 10px;
+    border: 1px solid #e5e7eb;
+}
+
+/* Form layout */
 form {
     display: flex;
     flex-direction: column;
@@ -35,38 +62,115 @@ form {
 
 label {
     margin-top: 15px;
-    margin-bottom: 5px;
+    margin-bottom: 6px;
     font-weight: bold;
+    font-size: 14px;
 }
 
+/* Input fields */
 input,
 textarea {
-    padding: 10px;
-    font-size: 16px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
+    width: 100%;
+    padding: 12px;
+    font-size: 15px;
+    font-family: inherit;
+    border: 1px solid #d1d5db;
+    border-radius: 7px;
+    background-color: white;
+}
+
+input:focus,
+textarea:focus {
+    outline: none;
+    border-color: #2563eb;
+    box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.1);
 }
 
 textarea {
-    min-height: 80px;
+    min-height: 90px;
     resize: vertical;
 }
 
-button {
-    margin-top: 20px;
-    padding: 10px;
-    font-size: 16px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    background-color: #333;
+/* Main Add Task button */
+form button {
+    margin-top: 22px;
+    padding: 12px;
+    background-color: #2563eb;
     color: white;
+    border: none;
+    border-radius: 7px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
 }
 
-button:hover {
-    background-color: #555;
+form button:hover {
+    background-color: #1d4ed8;
 }
 
+/* Task list section */
 .task-list {
-    margin-top: 30px;
+    margin-top: 35px;
+}
+
+/* Individual task card */
+.task-item {
+    background-color: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-left: 5px solid #2563eb;
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 15px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+/* Task title */
+.task-item h3 {
+    margin-top: 0;
+    margin-bottom: 12px;
+    font-size: 20px;
+    color: #111827;
+}
+
+/* Task information */
+.task-item p {
+    text-align: left;
+    margin: 7px 0;
+    color: #4b5563;
+}
+
+/* Task buttons */
+.task-item button {
+    margin-top: 15px;
+    margin-right: 8px;
+    padding: 9px 14px;
+    background-color: #374151;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.task-item button:hover {
+    background-color: #1f2937;
+}
+
+/* Mobile layout */
+@media (max-width: 600px) {
+    body {
+        padding: 20px 10px;
+    }
+
+    .container {
+        padding: 22px;
+    }
+
+    h1 {
+        font-size: 27px;
+    }
+
+    .task-form {
+        padding: 18px;
+    }
 }
