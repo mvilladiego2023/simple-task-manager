@@ -39,7 +39,7 @@ taskForm.addEventListener("submit", async function (event) {
         taskForm.reset();
 
         await loadTasks();
-        
+
     } catch (error) {
         console.error("Error adding task:", error);
         alert("There was an error adding the task.");
@@ -96,15 +96,50 @@ async function loadTasks() {
                 dueDate.textContent = "Due Date: None";
             }
 
-            taskItem.appendChild(title);
-            taskItem.appendChild(description);
-            taskItem.appendChild(dueDate);
-            taskItem.appendChild(status);
+taskItem.appendChild(title);
+taskItem.appendChild(description);
+taskItem.appendChild(dueDate);
+taskItem.appendChild(status);
 
-            taskList.appendChild(taskItem);
+// Add a Complete button if the task is still pending
+if (task.get("status") !== "Completed") {
+    const completeButton = document.createElement("button");
+
+    completeButton.textContent = "Complete";
+
+    completeButton.addEventListener("click", function () {
+        completeTask(task.id);
+    });
+
+    taskItem.appendChild(completeButton);
+}
+
+taskList.appendChild(taskItem);
+
         });
     } catch (error) {
         console.error("Error loading tasks:", error);
+    }
+}
+
+// Mark a task as completed
+async function completeTask(taskId) {
+    const Task = Parse.Object.extend("Task");
+    const query = new Parse.Query(Task);
+
+    try {
+        const task = await query.get(taskId);
+
+        task.set("status", "Completed");
+
+        await task.save();
+
+        alert("Task marked as completed!");
+
+        await loadTasks();
+    } catch (error) {
+        console.error("Error updating task:", error);
+        alert("There was an error updating the task.");
     }
 }
 
