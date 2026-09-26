@@ -114,6 +114,16 @@ if (task.get("status") !== "Completed") {
     taskItem.appendChild(completeButton);
 }
 
+const deleteButton = document.createElement("button");
+
+deleteButton.textContent = "Delete";
+
+deleteButton.addEventListener("click", function () {
+    deleteTask(task.id);
+});
+
+taskItem.appendChild(deleteButton);
+
 taskList.appendChild(taskItem);
 
         });
@@ -140,6 +150,25 @@ async function completeTask(taskId) {
     } catch (error) {
         console.error("Error updating task:", error);
         alert("There was an error updating the task.");
+    }
+}
+
+// Delete a task
+async function deleteTask(taskId) {
+    const Task = Parse.Object.extend("Task");
+    const query = new Parse.Query(Task);
+
+    try {
+        const task = await query.get(taskId);
+
+        await task.destroy();
+
+        alert("Task deleted successfully!");
+
+        await loadTasks();
+    } catch (error) {
+        console.error("Error deleting task:", error);
+        alert("There was an error deleting the task.");
     }
 }
 
