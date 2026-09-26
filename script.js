@@ -114,6 +114,16 @@ if (task.get("status") !== "Completed") {
     taskItem.appendChild(completeButton);
 }
 
+const editButton = document.createElement("button");
+
+editButton.textContent = "Edit";
+
+editButton.addEventListener("click", function () {
+    editTask(task.id);
+});
+
+taskItem.appendChild(editButton);
+
 const deleteButton = document.createElement("button");
 
 deleteButton.textContent = "Delete";
@@ -169,6 +179,81 @@ async function deleteTask(taskId) {
     } catch (error) {
         console.error("Error deleting task:", error);
         alert("There was an error deleting the task.");
+    }
+}
+
+// Edit an existing task
+async function editTask(taskId) {
+    const Task = Parse.Object.extend("Task");
+    const query = new Parse.Query(Task);
+
+    try {
+        const task = await query.get(taskId);
+
+        const currentTitle = task.get("title") || "";
+        const currentDescription = task.get("description") || "";
+        const currentDueDate = task.get("dueDate");
+
+        let currentDueDateText = "";
+
+        if (currentDueDate) {
+            currentDueDateText = currentDueDate
+                .toISOString()
+                .split("T")[0];
+        }
+
+        const newTitle = prompt(
+            "Edit task title:",
+            currentTitle
+        );
+
+        if (newTitle === null) {
+            return;
+        }
+
+        if (newTitle.trim() === "") {
+            alert("Task title cannot be empty.");
+            return;
+        }
+
+        const newDescription = prompt(
+            "Edit task description:",
+            currentDescription
+        );
+
+        if (newDescription === null) {
+            return;
+        }
+
+        const newDueDate = prompt(
+            "Edit due date (YYYY-MM-DD):",
+            currentDueDateText
+        );
+
+        if (newDueDate === null) {
+            return;
+        }
+
+        task.set("title", newTitle.trim());
+        task.set("description", newDescription.trim());
+
+        if (newDueDate.trim() === "") {
+            task.unset("dueDate");
+        } else {
+            task.set(
+                "dueDate",
+                new Date(newDueDate + "T00:00:00")
+            );
+        }
+
+        await task.save();
+
+        alert("Task updated successfully!");
+
+        await loadTasks();
+    } catch (error) {
+        console.error("Error editing task:", error);
+        alert("There was an error editing the task.");
     }
 }
 
