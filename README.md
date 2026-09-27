@@ -61,4 +61,4 @@ The `Task` database class contains:
 
 ## Demo Video
 
-YouTube demo video link will be added after the demonstration is recorded.
+https://youtu.be/KFg273-IE1s
